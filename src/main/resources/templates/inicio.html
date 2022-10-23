@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+      
+      <head>
+      <meta charset="UTF-8">
+      <title> Pagina de prueba</title>
+             </head>
+             
+    <body>
+    
+ <h1> hola mundo </h1>
+ <br><br>
+		
+		<a th:href="@{/agregar}">AGREGAR PERSONA</a>
+		
+		<br><br><br>
+		
+		
+		<div th:if="${personas != null and !personas.empty}">
+		
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Codigo de la persona</th>
+					<th>Nombre de la persona</th>
+					<th>Apellido de la persona</th>
+					<th>PULSAR PARA EDITAR</th>
+					<th>PULSAR PARA ELIMINAR</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="pers : ${personas}">
+					<td th:text="${pers.idPersona}">ID PERSONA</td>
+					<td th:text="${pers.nombre}">NOMBRE</td>
+					<td th:text="${pers.apellido}">APELLIDO</td>
+					<td><a th:href="@{/editar/} + ${pers.idPersona}" th:text="EDITAR"></a></td>	
+					<td><a th:href="@{eliminar(idPersona=${pers.idPersona})}" th:text="ELIMINAR"></a></td>			
+				</tr>
+			</tbody>			
+		</table>
+		
+		</div>
+		
+		<div th:if="${personas == null or personas.empty}">
+			<span style="color:red; font-size:25px;">No hay personas cargadas a la base de datos</span>
+		</div>
+	</body>
+</html>
+ 
